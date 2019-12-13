@@ -1,0 +1,1 @@
+doim_adapter-deploy
