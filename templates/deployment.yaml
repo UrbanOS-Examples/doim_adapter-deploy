@@ -5,6 +5,7 @@ metadata:
   labels:
 {{ include "doim-adapter.labels" . | indent 4 }}
 spec:
+  serviceAccountName: {{ .Chart.Name }}
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
@@ -16,6 +17,7 @@ spec:
         app.kubernetes.io/name: {{ include "doim-adapter.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
+      serviceAccountName: {{ .Chart.Name }}
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -36,7 +38,13 @@ spec:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
           - name: DOIM_CREDENTIALS_KEY
-          value: {{ .Values.doim_credentials_key }}
+            value: {{ .Values.doim.credentials_key }}
+          - name: DOIM_GENERATE_TOKENS_ENDPOINT
+            value: {{ .Values.doim.generate_token_endpoint }}
+          - name: DOIM_WORK_ORDERS_ENDPOINT
+            value: {{ .Values.doim.work_orders_endpoint }}
+          - name: SECRETS_ENDPOINT
+            value: {{ .Values.vault.endpoint }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

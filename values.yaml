@@ -1,6 +1,12 @@
 replicaCount: 1
 
-doim_credentials_key: ""
+doim:
+  credentials_key: doim_credentials
+  generate_token_endpoint: https://arc.columbus.gov/arcgis/tokens/generateToken
+  work_orders_endpoint: https://arc.columbus.gov/arcgis/rest/services/Test/LucityWorkOrder/MapServer/1/query
+
+vault:
+  endpoint: http://vault.vault:8200
 
 image:
   repository: smartcolumbusos/doim_adapter
