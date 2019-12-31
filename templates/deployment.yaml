@@ -43,6 +43,10 @@ spec:
             value: {{ .Values.doim.generate_token_endpoint }}
           - name: DOIM_WORK_ORDERS_ENDPOINT
             value: {{ .Values.doim.work_orders_endpoint }}
+          - name: DOIM_WORK_RESOURCES_ENDPOINT
+            value: {{ .Values.doim.work_resources_endpoint }}
+          - name: DOIM_WORK_TASKS_ENDPOINT
+            value: {{ .Values.doim.work_tasks_endpoint }}
           - name: SECRETS_ENDPOINT
             value: {{ .Values.vault.endpoint }}
       {{- with .Values.nodeSelector }}
