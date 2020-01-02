@@ -9,7 +9,7 @@ properties([
     pipelineTriggers([scos.dailyBuildTrigger()]),
     parameters([
         booleanParam(defaultValue: false, description: 'Deploy to development environment?', name: 'DEV_DEPLOYMENT'),
-        string(defaultValue: 'development', description: 'Image tag to deploy to dev environment', name: 'DEV_IMAGE_TAG')
+        string(defaultValue: 'latest', description: 'Image tag to deploy to dev environment', name: 'DEV_IMAGE_TAG')
     ])
 ])
 
@@ -25,10 +25,6 @@ node ('infrastructure') {
 
         doStageIfDeployingToDev('Deploy to Dev') {
             deployTo(applicationName, 'dev', "--set image.tag=${env.DEV_IMAGE_TAG} --recreate-pods")
-        }
-
-        doStageIfMergedToMaster('Process Dev job') {
-            scos.devDeployTrigger('doim_adapter', 'development', 'smartcolumbusos')
         }
 
         doStageIfMergedToMaster('Deploy to Staging') {

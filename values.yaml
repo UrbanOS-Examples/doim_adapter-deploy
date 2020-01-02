@@ -11,8 +11,8 @@ vault:
   endpoint: http://vault.vault:8200
 
 image:
-  repository: smartcolumbusos/doim_adapter
-  tag: wip
+  repository: 199837183662.dkr.ecr.us-east-2.amazonaws.com/scos/doim-adapter
+  tag: latest
   pullPolicy: Always
 
 nameOverride: ""
