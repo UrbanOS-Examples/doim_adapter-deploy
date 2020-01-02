@@ -49,7 +49,7 @@ def deployTo(applicationName, environment, extraArgs = '') {
             set -e
             helm init --client-only
             helm upgrade --install ${applicationName} . \
-                --namespace=streaming-services \
+                --namespace=doim \
                 ${extraArgs}
         """.trim())
     }
