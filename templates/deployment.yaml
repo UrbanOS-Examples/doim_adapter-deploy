@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "doim-adapter.fullname" . }}
+  labels:
+{{ include "doim-adapter.labels" . | indent 4 }}
+spec:
+  serviceAccountName: {{ .Chart.Name }}
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "doim-adapter.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "doim-adapter.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      serviceAccountName: {{ .Chart.Name }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /api/v1/healthcheck
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /api/v1/healthcheck
+              port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          env:
+          - name: DOIM_CREDENTIALS_KEY
+            value: {{ .Values.doim.credentials_key }}
+          - name: DOIM_GENERATE_TOKENS_ENDPOINT
+            value: {{ .Values.doim.generate_token_endpoint }}
+          - name: DOIM_WORK_ORDERS_ENDPOINT
+            value: {{ .Values.doim.work_orders_endpoint }}
+          - name: DOIM_WORK_RESOURCES_ENDPOINT
+            value: {{ .Values.doim.work_resources_endpoint }}
+          - name: DOIM_WORK_TASKS_ENDPOINT
+            value: {{ .Values.doim.work_tasks_endpoint }}
+          - name: SECRETS_ENDPOINT
+            value: {{ .Values.vault.endpoint }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}

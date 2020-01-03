@@ -1,0 +1,38 @@
+replicaCount: 1
+
+doim:
+  credentials_key: doim_credentials
+  generate_token_endpoint: https://arc.columbus.gov/arcgis/tokens/generateToken
+  work_orders_endpoint: https://arc.columbus.gov/arcgis/rest/services/Test/LucityWorkOrder/MapServer/1/query
+  work_resources_endpoint: https://arc.columbus.gov/arcgis/rest/services/Test/LucityWorkOrder/MapServer/2/query
+  work_tasks_endpoint: https://arc.columbus.gov/arcgis/rest/services/Test/LucityWorkOrder/MapServer/3/query
+
+vault:
+  endpoint: http://vault.vault:8200
+
+image:
+  repository: 199837183662.dkr.ecr.us-east-2.amazonaws.com/scos/doim-adapter
+  tag: latest
+  pullPolicy: Always
+
+nameOverride: ""
+fullnameOverride: ""
+
+service:
+  type: ClusterIP
+  port: 80
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

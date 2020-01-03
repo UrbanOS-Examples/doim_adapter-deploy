@@ -1,0 +1,4 @@
+apiVersion: v1
+description: Adapter API to expose work order data for DoIM
+name: doim-adapter
+version: 0.1.0
