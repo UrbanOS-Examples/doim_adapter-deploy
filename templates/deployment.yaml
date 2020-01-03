@@ -28,11 +28,11 @@ spec:
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /healthcheck
+              path: /api/v1/healthcheck
               port: http
           readinessProbe:
             httpGet:
-              path: /healthcheck
+              path: /api/v1/healthcheck
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
