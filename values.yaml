@@ -12,7 +12,7 @@ vault:
 
 image:
   repository: 199837183662.dkr.ecr.us-east-2.amazonaws.com/scos/doim-adapter
-  tag: 0.1.0
+  tag: 0.1.1
   pullPolicy: Always
 
 nameOverride: ""
