@@ -2,10 +2,10 @@ replicaCount: 1
 
 doim:
   credentials_key: doim_credentials
-  generate_token_endpoint: https://arc.columbus.gov/arcgis/tokens/generateToken
-  work_orders_endpoint: https://arc.columbus.gov/arcgis/rest/services/Test/LucityWorkOrder/MapServer/1/query
-  work_resources_endpoint: https://arc.columbus.gov/arcgis/rest/services/Test/LucityWorkOrder/MapServer/2/query
-  work_tasks_endpoint: https://arc.columbus.gov/arcgis/rest/services/Test/LucityWorkOrder/MapServer/3/query
+  generate_token_endpoint: https://maps2.columbus.gov/arcgis/tokens/generateToken
+  work_orders_endpoint: https://maps2.columbus.gov/arcgis/rest/services/Applications/LucityWorkOrder/MapServer/1/query
+  work_resources_endpoint: https://maps2.columbus.gov/arcgis/rest/services/Applications/LucityWorkOrder/MapServer/2/query
+  work_tasks_endpoint: https://maps2.columbus.gov/arcgis/rest/services/Applications/LucityWorkOrder/MapServer/3/query
 
 vault:
   endpoint: http://vault.vault:8200
