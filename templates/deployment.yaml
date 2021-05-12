@@ -5,7 +5,6 @@ metadata:
   labels:
 {{ include "doim-adapter.labels" . | indent 4 }}
 spec:
-  serviceAccountName: {{ .Chart.Name }}
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
