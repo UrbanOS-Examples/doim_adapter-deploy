@@ -42,8 +42,6 @@ node ('infrastructure') {
 def deployTo(applicationName, environment, extraArgs = '') {
     scos.withEksCredentials(environment) {
         sh("""#!/bin/bash
-            set -e
-            helm init --client-only
             helm upgrade --install ${applicationName} . \
                 --namespace=doim \
                 ${extraArgs}
