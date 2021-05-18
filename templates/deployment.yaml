@@ -26,9 +26,13 @@ spec:
               containerPort: 80
               protocol: TCP
           livenessProbe:
+            failureThreshold: 6
             httpGet:
               path: /api/v1/healthcheck
               port: http
+              scheme: HTTP
+            periodSeconds: 10
+            timeoutSeconds: 10
           readinessProbe:
             httpGet:
               path: /api/v1/healthcheck
